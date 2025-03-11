@@ -18,7 +18,7 @@ static void on_app_open(GtkApplication *g_app, gpointer gpointer_data) {
     gtk_grid_set_column_spacing(GTK_GRID(window_grid_t), 10);
     gtk_window_set_child(GTK_WINDOW(window), window_grid_t);
 
-    setup_ui_new(window_grid_t);
+    setup_ui_new(window_grid_t, window);
     gtk_widget_show(window);
 }
 

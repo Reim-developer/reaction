@@ -12,6 +12,11 @@ typedef struct {
     int grid_height;
 } button_t;
 
-button_t *open_usb_button_new();
+/*
+* Defined OPEN_USB_BUTTON and set this even, when click to Open USB button
+*/
+button_t *open_usb_button_new(GtkWidget *windows);
+void open_usb_button_clicked(GtkButton *open_usb_button, gpointer data);
+static void on_open_usb_dialog(GtkDialog *dialog, int response_id, gpointer data);
 
 #endif

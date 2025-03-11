@@ -1,7 +1,6 @@
 #include <gtk/gtk.h>
 #include "main.h"
-#include "button.h"
-#include "label.h"
+#include "components.h"
 
 static void on_app_open(GtkApplication *g_app, gpointer gpointer_data) {
     app_property_t *app_info_t = (app_property_t *) gpointer_data;
@@ -19,27 +18,8 @@ static void on_app_open(GtkApplication *g_app, gpointer gpointer_data) {
     gtk_grid_set_column_spacing(GTK_GRID(window_grid_t), 10);
     gtk_window_set_child(GTK_WINDOW(window), window_grid_t);
 
-    button_t *open_usb_btn_t = open_usb_button_new();
-    gtk_grid_attach(GTK_GRID(window_grid_t),
-        open_usb_btn_t->button,
-        open_usb_btn_t->grid_column,
-        open_usb_btn_t->grid_row,
-        open_usb_btn_t->grid_width,
-        open_usb_btn_t->grid_height
-    );
-
-    label_t *label_description_top = label_description_new();
-    gtk_grid_attach(GTK_GRID(window_grid_t), 
-        label_description_top->label,
-        label_description_top->grid_column,
-        label_description_top->grid_row,
-        label_description_top->grid_width,
-        label_description_top->grid_height
-    );
-
+    setup_ui_new(window_grid_t);
     gtk_widget_show(window);
-    g_free(open_usb_btn_t);
-    g_free(label_description_top);
 }
 
 int main(int argc, char *argv[]) {

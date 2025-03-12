@@ -12,6 +12,6 @@ typedef struct {
     unsigned int grid_height;
 } label_t;
 
-label_t *label_description_new();
+label_t *label_description_new(void);
 
 #endif // LABEL_H 

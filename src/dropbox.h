@@ -13,6 +13,7 @@ typedef struct {
     unsigned int grid_height;
 } dropbox_t;
 
-dropbox_t *dropbox_set_new(void);
+dropbox_t *device_dropbox_new(void);
+dropbox_t *list_file_dropbox_new(void);
 
 #endif // DROPBOX_H

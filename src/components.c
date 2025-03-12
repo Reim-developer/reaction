@@ -29,7 +29,5 @@ void setup_ui_new(GtkWidget *windows_grid_t, GtkWidget *windows) {
     device_list_t->grid_height
     );
 
-    g_free(open_usb_btn_t);
-    g_free(label_description_top);
-    g_free(device_list_t);
+    open_usb_btn_t->device_list_t = device_list_t;
 }

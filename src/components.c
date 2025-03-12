@@ -4,13 +4,20 @@
 #include "label.h"
 
 void setup_ui_new(GtkWidget *windows_grid_t, GtkWidget *windows) {
-    button_t *open_usb_btn_t = open_usb_button_new(windows);
+    button_t *open_usb_btn_t = open_usb_button_new_widget(windows);
     gtk_grid_attach(GTK_GRID(windows_grid_t),
         open_usb_btn_t->button,
         open_usb_btn_t->grid_column,
         open_usb_btn_t->grid_row,
         open_usb_btn_t->grid_width,
         open_usb_btn_t->grid_height
+    );
+
+    button_t *open_file_button_t = open_file_button_new_widget(windows);
+    gtk_grid_attach(GTK_GRID(windows_grid_t),
+        open_file_button_t->button, open_file_button_t->grid_column,
+        open_file_button_t->grid_row, open_file_button_t->grid_width,
+        open_file_button_t->grid_height
     );
 
     label_t *label_description_top = label_description_new();

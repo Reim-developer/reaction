@@ -1,6 +1,6 @@
 #include "label.h"
 
-label_t *label_description_new() {
+label_t *label_description_new(void) {
     label_t *label_description_top = g_new(label_t, 1);
     label_description_top->label = gtk_label_new(NULL);
     label_description_top->width = 10;

@@ -14,8 +14,8 @@ static void on_app_open(GtkApplication *g_app, gpointer gpointer_data) {
     gtk_window_set_default_size(GTK_WINDOW(window), app_info_t->app_width, app_info_t->app_height);
 
     GtkWidget *window_grid_t = gtk_grid_new();
-    gtk_grid_set_row_spacing(GTK_GRID(window_grid_t), 10);
-    gtk_grid_set_column_spacing(GTK_GRID(window_grid_t), 10);
+    gtk_grid_set_row_spacing(GTK_GRID(window_grid_t), 20);
+    gtk_grid_set_column_spacing(GTK_GRID(window_grid_t), 20);
     gtk_window_set_child(GTK_WINDOW(window), window_grid_t);
 
     setup_ui_new(window_grid_t, window);

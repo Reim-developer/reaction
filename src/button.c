@@ -158,3 +158,21 @@ button_t *open_file_button_new_widget(GtkWidget *windows) {
     return open_file_button_t;
 }
 
+button_t *start_button_new_widget(GtkWidget *windows) {
+    button_t *start_button_t = g_new(button_t, 1);
+    start_button_t->button = gtk_button_new_with_label("Start");
+
+    start_button_t->width = 20;
+    start_button_t->height = 1;
+
+    start_button_t->grid_column = 15;
+    start_button_t->grid_row = 11;
+
+    start_button_t->grid_width = 20;
+    start_button_t->grid_height = 1;
+
+    gtk_widget_set_size_request(start_button_t->button, start_button_t->width, start_button_t->height);
+
+    return start_button_t;
+}
+

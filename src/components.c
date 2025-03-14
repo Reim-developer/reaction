@@ -42,5 +42,6 @@ void setup_ui_new(GtkWidget *windows_grid_t, GtkWidget *windows) {
         file_list_t->grid_row, file_list_t->width, file_list_t->height
     );
 
-    open_usb_btn_t->device_list_t = device_list_t;
+    open_usb_btn_t->dropbox_data_t = device_list_t;
+    open_file_button_t->dropbox_data_t = file_list_t;
 }

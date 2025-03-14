@@ -4,14 +4,14 @@
 
 typedef struct {
     GtkWidget *label;
-    unsigned int width;
-    unsigned int height;
-    unsigned int grid_column;
-    unsigned int grid_row;
-    unsigned int grid_width;
-    unsigned int grid_height;
+    int width;
+    int height;
+    int grid_column;
+    int grid_row;
+    int grid_width;
+    int grid_height;
 } label_t;
 
 label_t *label_description_new(void);
 
-#endif // LABEL_H 
+#endif // LABEL_H

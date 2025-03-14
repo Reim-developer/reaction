@@ -5,12 +5,12 @@
 typedef struct {
     GtkWidget *dropbox;
     GListModel *device_model_list;
-    unsigned int width;
-    unsigned int height;
-    unsigned int grid_column;
-    unsigned int grid_row;
-    unsigned int grid_width;
-    unsigned int grid_height;
+    int width;
+    int height;
+    int grid_column;
+    int grid_row;
+    int grid_width;
+    int grid_height;
 } dropbox_t;
 
 dropbox_t *device_dropbox_new(void);

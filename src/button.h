@@ -23,5 +23,7 @@ typedef struct {
 button_t *open_usb_button_new_widget(GtkWidget *windows);
 // Create new: open_file_button widget.
 button_t *open_file_button_new_widget(GtkWidget *windows);
+// Create new: start_button widget.
+button_t *start_button_new_widget(GtkWidget *windows);
 
 #endif // BUTTON_H

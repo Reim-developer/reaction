@@ -12,6 +12,7 @@ set(SRC
     src/button.c
     src/components.c
     src/label.c
+    src/panel.c
 )
 
 add_executable(main ${SRC})

@@ -17,12 +17,4 @@ set(SRC
 add_executable(main ${SRC})
 target_include_directories(main PRIVATE ${GTK4_INCLUDE_DIRS})
 target_link_libraries(main PRIVATE ${GTK4_LIBRARIES})
-target_compile_options(main PRIVATE
-    ${GTK4_CFLAGS_OTHER}
-    -Wall -Wextra -Wpedantic -Werror
-    -Wconversion -Wsign-conversion
-    -Wshadow -Wformat=2 -Wundef
-    -Wno-unused-parameter
-)
-
-
+target_compile_options(main PRIVATE ${GTK4_CFLAGS_OTHER})

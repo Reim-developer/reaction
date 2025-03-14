@@ -24,7 +24,7 @@ dropbox_t *device_dropbox_new(void) {
     return dropbox_device_t;
 }
 
-dropbox_t *list_file_dropbox_new() {
+dropbox_t *list_file_dropbox_new(void) {
     dropbox_t *list_file_dropbox_t = g_new(dropbox_t, 1);
     GListModel *list_file_model_t = G_LIST_MODEL(gtk_string_list_new((const char *[]) {
     "No ISO/Image file found", NULL

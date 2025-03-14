@@ -10,7 +10,7 @@
 // Button widget struct.
 typedef struct {
     GtkWidget *button;
-    dropbox_t *device_list_t;
+    dropbox_t *dropbox_data_t;
     unsigned int width;
     unsigned int height;
     unsigned int grid_column;

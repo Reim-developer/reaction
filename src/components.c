@@ -5,13 +5,13 @@
 #include "panel.h"
 
 void setup_ui_new(GtkWidget *windows_grid_t, GtkWidget *windows) {
-    button_t *open_usb_btn_t = open_usb_button_new_widget(windows);
+    button_t *open_usb_button_t = open_usb_button_new_widget(windows);
     gtk_grid_attach(GTK_GRID(windows_grid_t),
-        open_usb_btn_t->button,
-        open_usb_btn_t->grid_column,
-        open_usb_btn_t->grid_row,
-        open_usb_btn_t->grid_width,
-        open_usb_btn_t->grid_height
+        open_usb_button_t->button,
+        open_usb_button_t->grid_column,
+        open_usb_button_t->grid_row,
+        open_usb_button_t->grid_width,
+        open_usb_button_t->grid_height
     );
 
     button_t *open_file_button_t = open_file_button_new_widget(windows);
@@ -57,7 +57,9 @@ void setup_ui_new(GtkWidget *windows_grid_t, GtkWidget *windows) {
         text_result_view_t->grid_height
     );
 
-    open_usb_btn_t->dropbox_data_t = device_list_t;
+    open_usb_button_t->dropbox_data_t = device_list_t;
+    open_usb_button_t->panel_text_view_t = text_result_view_t;
+
     open_file_button_t->dropbox_data_t = file_list_t;
     open_file_button_t->panel_text_view_t = text_result_view_t;
 }

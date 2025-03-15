@@ -20,7 +20,17 @@ static void on_open_usb_dialog(GtkDialog *dialog, int response_id, gpointer data
             g_warning("device_directory is NULL. Stop program");
             return;
        }
+       int text_view_status = is_default_text_view(open_usb_button_t->panel_text_view_t, DEFAULT_TEXT_CONTENT);
        char *device_name = g_path_get_basename(device_directory);
+       char *fmt_content = g_strdup_printf("Selected device: %s", device_name);
+
+       if(text_view_status == IS_DEFAULT_TEXT_VIEW) {
+            result_text_clear_new(open_usb_button_t->panel_text_view_t);
+            result_text_append_new(open_usb_button_t->panel_text_view_t, fmt_content);
+       } else {
+            result_text_append_new(open_usb_button_t->panel_text_view_t, fmt_content);
+       }
+       g_free(fmt_content);
 
        GListModel *device_list_model_t = G_LIST_MODEL(gtk_string_list_new((const char *[]) {
             device_name, NULL
@@ -49,12 +59,19 @@ static void on_open_file_dialog(GtkDialog *dialog, int response_id, gpointer dat
         GtkFileChooser *file_chooser_t = GTK_FILE_CHOOSER(dialog);
         GFile *g_file_t = gtk_file_chooser_get_file(file_chooser_t);
         char *boot_file_path = g_file_t ? g_file_get_path(g_file_t) : NULL;
+        int text_view_status = is_default_text_view(open_file_button_t->panel_text_view_t, DEFAULT_TEXT_CONTENT);
 
         if (g_file_test(boot_file_path, G_FILE_TEST_IS_DIR)) {
-            result_text_clear_new(open_file_button_t->panel_text_view_t);
-            
             char *fmt_content = g_strdup_printf(
                 "Selected is not allowed: %s\nOnly support .iso or .img file formats", boot_file_path);
+
+            if(text_view_status == IS_DEFAULT_TEXT_VIEW) {
+                result_text_clear_new(open_file_button_t->panel_text_view_t);
+                result_text_append_new(open_file_button_t->panel_text_view_t, fmt_content);
+                g_free(fmt_content);
+                return;
+            }  
+            
             result_text_append_new(open_file_button_t->panel_text_view_t, fmt_content);
             
             g_free(fmt_content);
@@ -67,17 +84,19 @@ static void on_open_file_dialog(GtkDialog *dialog, int response_id, gpointer dat
         }
         char *boot_file_name = g_path_get_basename(boot_file_path);
         char  *fmt_content = g_strdup_printf("Selected boot file successfully with name: %s", boot_file_name);
-        result_text_clear_new(open_file_button_t->panel_text_view_t);
-        result_text_append_new(open_file_button_t->panel_text_view_t, fmt_content);
 
+        if (text_view_status == IS_DEFAULT_TEXT_VIEW) {
+            result_text_clear_new(open_file_button_t->panel_text_view_t);
+            result_text_append_new(open_file_button_t->panel_text_view_t, fmt_content);
+        } else {
+            result_text_append_new(open_file_button_t->panel_text_view_t, fmt_content);
+        }
         g_free(fmt_content);
 
         GListModel *boot_file_model_t = G_LIST_MODEL(gtk_string_list_new((const char *[]) {
             boot_file_name, NULL
         }));
         
-
-
         boot_file_list_t->device_model_list = boot_file_model_t;
         gtk_drop_down_set_model(GTK_DROP_DOWN(boot_file_list_t->dropbox), boot_file_list_t->device_model_list);
 

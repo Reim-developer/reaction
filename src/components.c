@@ -59,4 +59,5 @@ void setup_ui_new(GtkWidget *windows_grid_t, GtkWidget *windows) {
 
     open_usb_btn_t->dropbox_data_t = device_list_t;
     open_file_button_t->dropbox_data_t = file_list_t;
+    open_file_button_t->panel_text_view_t = text_result_view_t;
 }

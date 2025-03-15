@@ -5,12 +5,14 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 #include "dropbox.h"
+#include "panel.h"
 #include <gtk/gtk.h>
 
 // Button widget struct.
 typedef struct {
     GtkWidget *button;
     dropbox_t *dropbox_data_t;
+    panel_t *panel_text_view_t;
     int width;
     int height;
     int grid_column;

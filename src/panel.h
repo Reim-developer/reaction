@@ -13,6 +13,11 @@ typedef struct {
     int grid_height;
 } panel_t;
 
-panel_t * result_panel_widget_new(void);
+// Create new text_view_panel widget.
+panel_t *result_panel_widget_new(void);
+// Append text to text_view_panel widget.
+void result_text_append_new(panel_t *panel_text_t, const char *content);
+// Clear text in text_view_panel widget.
+void result_text_clear_new(panel_t *panel_text_t);
 
 #endif // PANEL_H 

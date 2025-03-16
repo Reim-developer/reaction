@@ -56,13 +56,13 @@ static void on_open_file_dialog(GtkDialog *dialog, int response_id, gpointer dat
                 result_text_append_new(open_file_button_t->panel_text_view_t, fmt_content);
                 g_free(fmt_content);
                 return;
-            }  
-            
+            }
             result_text_append_new(open_file_button_t->panel_text_view_t, fmt_content);
             
             g_free(fmt_content);
             return;
         }
+        open_file_button_t->start_button->boot_file_path = g_strdup(boot_file_path);
 
         char *boot_file_name = g_path_get_basename(boot_file_path);
         char  *fmt_content = g_strdup_printf("Selected boot file successfully with name: %s", boot_file_name);
@@ -132,6 +132,31 @@ static void on_open_file_button_clicked(GtkButton *button, gpointer data) {
     gtk_window_present(GTK_WINDOW(choose_file_dialog));
 }
 
+static void on_start_dialog(GtkDialog *dialog_t, int response, gpointer data_t) {
+    gtk_window_destroy(GTK_WINDOW(dialog_t));
+}
+
+static void on_start_button_clicked(GtkButton *button, gpointer data_t) {
+    button_t *start_button_t = (button_t *) data_t;
+    GtkWindow *main_windows = GTK_WINDOW(
+        gtk_widget_get_ancestor(GTK_WIDGET(button), 
+        GTK_TYPE_WINDOW
+    ));
+
+    GFile *file_t = g_file_new_for_path(start_button_t->boot_file_path);
+    if(!g_file_query_exists(file_t, NULL)) {
+        GtkWidget *dialog_t = gtk_message_dialog_new(
+            main_windows, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO,
+            GTK_BUTTONS_OK, "Please choose valid boot file"
+        );
+        gtk_window_present(GTK_WINDOW(dialog_t));
+        g_signal_connect(dialog_t, "response", G_CALLBACK(on_start_dialog), NULL);
+        return;
+    }
+    
+    g_print("%s\n", start_button_t->boot_file_path);
+}
+
 button_t *open_usb_button_new_widget(GtkWidget *windows) {
     button_t *open_usb_button_t = g_new(button_t, 1);
     open_usb_button_t->button = gtk_button_new_with_label("Choose USB...");
@@ -188,6 +213,7 @@ button_t *start_button_new_widget(GtkWidget *windows) {
 
     gtk_widget_set_size_request(start_button_t->button, start_button_t->width, start_button_t->height);
 
+    g_signal_connect(start_button_t->button, "clicked", G_CALLBACK(on_start_button_clicked), start_button_t);
     return start_button_t;
 }
 

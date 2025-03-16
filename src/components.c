@@ -62,4 +62,5 @@ void setup_ui_new(GtkWidget *windows_grid_t, GtkWidget *windows) {
 
     open_file_button_t->dropbox_data_t = file_list_t;
     open_file_button_t->panel_text_view_t = text_result_view_t;
+    open_file_button_t->start_button = start_button_t;
 }

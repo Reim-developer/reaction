@@ -7,19 +7,10 @@ static void on_open_usb_dialog(GtkDialog *dialog, int response_id, gpointer data
        button_t *open_usb_button_t = (button_t *) data;
        dropbox_t *dropbox_data_t = open_usb_button_t->dropbox_data_t;
 
-       if (dropbox_data_t == NULL) {
-            g_warning("dropbox_data_t is NULL. Stop program");
-            return;
-       }
-
        GtkFileChooser *file_chooser_t = GTK_FILE_CHOOSER(dialog);
        GFile *g_file_t = gtk_file_chooser_get_file(file_chooser_t);
        char *device_directory = g_file_t ? g_file_get_path(g_file_t) : NULL;
 
-       if (device_directory == NULL) {
-            g_warning("device_directory is NULL. Stop program");
-            return;
-       }
        int text_view_status = is_default_text_view(open_usb_button_t->panel_text_view_t, DEFAULT_TEXT_CONTENT);
        char *device_name = g_path_get_basename(device_directory);
        char *fmt_content = g_strdup_printf("Selected device: %s", device_name);
@@ -51,11 +42,6 @@ static void on_open_file_dialog(GtkDialog *dialog, int response_id, gpointer dat
         button_t *open_file_button_t = (button_t *) data;
         dropbox_t *boot_file_list_t =  open_file_button_t->dropbox_data_t;
 
-        if (boot_file_list_t == NULL) {
-            g_warning("BOOT_FILE_LIST_T is NULL. Stop program");
-            return;
-        }
-
         GtkFileChooser *file_chooser_t = GTK_FILE_CHOOSER(dialog);
         GFile *g_file_t = gtk_file_chooser_get_file(file_chooser_t);
         char *boot_file_path = g_file_t ? g_file_get_path(g_file_t) : NULL;
@@ -78,10 +64,6 @@ static void on_open_file_dialog(GtkDialog *dialog, int response_id, gpointer dat
             return;
         }
 
-        if (boot_file_path == NULL) {
-            g_warning("BOOT_FILE_PATH is NULL. Stop program");
-            return;
-        }
         char *boot_file_name = g_path_get_basename(boot_file_path);
         char  *fmt_content = g_strdup_printf("Selected boot file successfully with name: %s", boot_file_name);
 

@@ -8,8 +8,10 @@
 #include "panel.h"
 #include <gtk/gtk.h>
 
+struct button_t;
+
 // Button widget struct.
-typedef struct {
+typedef struct button_t {
     GtkWidget *button;
     dropbox_t *dropbox_data_t;
     panel_t *panel_text_view_t;
@@ -19,6 +21,8 @@ typedef struct {
     int grid_row;
     int grid_width;
     int grid_height;
+    char *boot_file_path;
+    struct button_t *start_button;
 } button_t;
 
 // Create new: open_usb_button widget.

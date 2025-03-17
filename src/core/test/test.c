@@ -1,5 +1,7 @@
-#include "format.h"
+#include "core.h"
 
 int main() {
-    format_device("/dev/sdb");
+    const char *device = "/dev/sdb";
+    // format_device(device);
+    create_mbr_partition(device);
 }

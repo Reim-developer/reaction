@@ -1,5 +1,40 @@
 #include "core.h"
 
+static RESULT_STATUS get_mount_point(const char *device, char *out_mount, size_t size) {
+     FILE *file_t = setmntent("/proc/mounts", "r");
+
+     if(!file_t)
+          return GET_MOUNT_ERROR;
+
+     struct mntent *mntent_t;
+     while((mntent_t = getmntent(file_t)) != NULL) {
+          if(strncmp(mntent_t->mnt_fsname, device, strlen(device)) == 0) {
+               strncpy(out_mount, mntent_t->mnt_dir, size - 1);
+               out_mount[size - 1] = '\0';
+               endmntent(file_t);
+               printf("%s\n", mntent_t->mnt_fsname);
+     
+               return MOUNT_POINT_FOUND;
+          }
+     }
+
+     endmntent(file_t);
+     return MOUNT_POINT_NOT_FOUND;
+}
+
+RESULT_STATUS unmount_device(const char *device) {
+     char mount_point[256];
+
+     RESULT_STATUS get_mount_point_status = get_mount_point(
+          device, mount_point, sizeof(mount_point)
+     );
+     if(get_mount_point_status == MOUNT_POINT_FOUND) {
+          if(umount2(mount_point, MNT_FORCE) == 0) 
+               return UNMOUNT_DEVICE_SUCCESS;
+     }
+     return UNMOUNT_DEVICE_FAILED;
+}
+
 RESULT_STATUS format_device(const char *device) {
    int fd_status = open(device, O_RDWR | O_EXCL);
 

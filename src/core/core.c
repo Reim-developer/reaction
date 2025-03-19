@@ -3,8 +3,12 @@
 static RESULT_STATUS get_mount_point(const char *device, char *out_mount, size_t size) {
      FILE *file_t = setmntent("/proc/mounts", "r");
 
-     if(!file_t)
+     if(!file_t) {
+          if(errno == EPERM || errno == EACCES)
+               return NO_PERMIT_OPERATION;
+
           return GET_MOUNT_ERROR;
+     }
 
      struct mntent *mntent_t;
      while((mntent_t = getmntent(file_t)) != NULL) {
@@ -28,10 +32,16 @@ RESULT_STATUS unmount_device(const char *device) {
      RESULT_STATUS get_mount_point_status = get_mount_point(
           device, mount_point, sizeof(mount_point)
      );
-     if(get_mount_point_status == MOUNT_POINT_FOUND) {
-          if(umount2(mount_point, MNT_FORCE) == 0) 
-               return UNMOUNT_DEVICE_SUCCESS;
-     }
+
+     if(get_mount_point_status != MOUNT_POINT_FOUND) 
+          return UNMOUNT_DEVICE_FAILED;
+
+     if(umount2(mount_point, MNT_FORCE) == 0) 
+          return UNMOUNT_DEVICE_SUCCESS;
+
+     if(errno == EPERM)
+          return NO_PERMIT_OPERATION;
+
      return UNMOUNT_DEVICE_FAILED;
 }
 

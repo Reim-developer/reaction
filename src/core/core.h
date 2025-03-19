@@ -6,6 +6,7 @@
 #include <parted/parted.h>
 #include <mntent.h>
 #include <sys/mount.h>
+#include <errno.h>
 
 typedef enum {
     SUCCESS = 0,
@@ -19,7 +20,8 @@ typedef enum {
     MOUNT_POINT_NOT_FOUND = 8,
     GET_MOUNT_ERROR = 9,
     UNMOUNT_DEVICE_SUCCESS = 10,
-    UNMOUNT_DEVICE_FAILED =  11
+    UNMOUNT_DEVICE_FAILED =  11,
+    NO_PERMIT_OPERATION = 12
 } RESULT_STATUS;
 
 RESULT_STATUS unmount_device(const char *device);

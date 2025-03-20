@@ -16,7 +16,6 @@ static RESULT_STATUS get_mount_point(const char *device, char *out_mount, size_t
                strncpy(out_mount, mntent_t->mnt_dir, size - 1);
                out_mount[size - 1] = '\0';
                endmntent(file_t);
-               printf("%s\n", mntent_t->mnt_fsname);
      
                return MOUNT_POINT_FOUND;
           }
@@ -101,6 +100,63 @@ RESULT_STATUS create_mbr_partition(const char *device) {
 
      ped_disk_destroy(disk_t);
      ped_device_destroy(device_t);
+
+     return SUCCESS;
+}
+
+RESULT_STATUS create_fat32_file_system(const char *device) {
+     PedDevice *device_t;
+     PedDisk *disk_t;
+     PedPartition *partition_t;
+     PedFileSystem *file_system_t;
+     PedGeometry *geometry_t;
+     
+     device_t = ped_device_get(device);
+     if(!device_t)
+          return DEVICE_NOT_FOUND;
+
+     disk_t = ped_disk_new(device_t);
+     if(!disk_t) {
+          ped_device_destroy(device_t);
+          return LOAD_DISK_INFO_FAILED;
+     }
+
+     partition_t = ped_disk_get_partition(disk_t, 1);
+     if(!partition_t) {
+          ped_device_destroy(device_t);
+          ped_disk_destroy(disk_t);
+          return PARTITION_NOT_FOUND;
+     }
+
+     geometry_t = ped_geometry_new(device_t, 
+          partition_t->geom.start, partition_t->geom.length);
+     
+     if(!geometry_t) {
+          ped_device_destroy(device_t);
+          ped_disk_destroy(disk_t);
+          return GET_GEOMETRY_PARTITION_FAILED;
+     }
+
+     char partition_path[256];
+     snprintf(partition_path, sizeof(partition_path), "%s1", device_t->path);
+     struct fat32_params params = {
+          .device = partition_path,
+          .sectors = geometry_t->length * (device_t->sector_size / 512),
+          .sectors_per_cluster = 0,
+          .volume_label = "WHY"
+     };
+
+     RESULT_STATUS result = create_fat32(&params);
+     if(result != SUCCESS) {
+          ped_device_destroy(device_t);
+          ped_disk_destroy(disk_t);
+          ped_geometry_destroy(geometry_t);
+          return FORMAT_FAT32_FAILED;
+     }
+
+     ped_device_destroy(device_t);
+     ped_disk_destroy(disk_t);
+     ped_geometry_destroy(geometry_t);
 
      return SUCCESS;
 }

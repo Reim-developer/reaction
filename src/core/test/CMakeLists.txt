@@ -7,6 +7,7 @@ pkg_check_modules(PARTED REQUIRED libparted)
 set(SOURCE
     test.c
     ../core.c
+    ../fat32.c
 )
 add_executable(test ${SOURCE})
 target_include_directories(test PRIVATE ../ ${PARTED_INCLUDE_DIRS})

@@ -142,8 +142,7 @@ RESULT_STATUS create_fat32_file_system(const char *device) {
      struct fat32_params params = {
           .device = partition_path,
           .sectors = geometry_t->length * (device_t->sector_size / 512),
-          .sectors_per_cluster = 0,
-          .volume_label = "WHY"
+          .sectors_per_cluster = 0
      };
 
      RESULT_STATUS result = create_fat32(&params);

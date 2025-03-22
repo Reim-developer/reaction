@@ -67,7 +67,6 @@ RESULT_STATUS create_fat32(struct fat32_params* params) {
     boot_sector[50] = 6; /* Backup boot sector */
     boot_sector[510] = 0x55; boot_sector[511] = 0xAA;
 
-    memcpy(boot_sector + 0x52, params->volume_label, strlen(params->volume_label) > 11 ? 11 : strlen(params->volume_label));
     memcpy(boot_sector + 0x36, "FAT32   ", 8);
 
     lseek(device, 0, SEEK_SET);

@@ -12,7 +12,6 @@ struct fat32_params {
     const char *device;
     unsigned long long sectors;
     int sectors_per_cluster;
-    const char *volume_label;
 };
 
 RESULT_STATUS create_fat32(struct fat32_params *params);

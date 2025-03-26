@@ -1,12 +1,22 @@
 #ifndef mainWindow_HPP
 #define mainWindow_HPP
 #include <QtWidgets/QMainWindow>
+#include "common/props.hpp"
+#include "utils/utils.hpp"
 
-class MainWindow : public QMainWindow {
-    Q_OBJECT
+using namespace Reaction::Utils;
 
-public:
-    explicit MainWindow(QWidget *window = nullptr);
-    ~MainWindow();
-};
+namespace Reaction {
+    class MainWindow : public QMainWindow {
+        Q_OBJECT
+
+    public:
+        explicit MainWindow(QWidget *window = nullptr);
+        ~MainWindow();
+
+    private:
+        AppProps *props;
+        Geometry *geometry;
+    };
+}
 #endif // mainWindow_HPP

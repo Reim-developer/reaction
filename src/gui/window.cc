@@ -1,10 +1,13 @@
-#include "../main.hpp"
+#include "../mainWindow.hpp"
 #include "../common/props.hpp"
+#include "../utils/utils.hpp"
 #include <QtWidgets/QWidget>
 #include <QtCore/QString>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
 #include <QtGui/QScreen>
+
+using namespace ReactionUtils;
 
 MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
     AppProps *props = new AppProps();
@@ -17,11 +20,10 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
 
     setWindowTitle(title_fmt);
     resize(800, 600);
+    
+    Geometry::moveCenter(this);
+}
 
-    QScreen *screen = QApplication::primaryScreen();
-    QRect screenGeometry = screen->geometry();
+MainWindow::~MainWindow() {
 
-    int x = (screenGeometry.width() - width()) / 2;
-    int y = (screenGeometry.height() - height()) / 2;
-    move(x, y);
 }

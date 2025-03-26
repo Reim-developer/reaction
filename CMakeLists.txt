@@ -9,6 +9,7 @@ set(
     src/mainWindow.hpp
 
     src/utils/utils.hpp
+    src/utils/utils.cc
     src/gui/window.cc
 )
 

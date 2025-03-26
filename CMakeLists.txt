@@ -10,7 +10,9 @@ set(
 
     src/utils/utils.hpp
     src/utils/utils.cc
+
     src/gui/window.cc
+    src/gui/label.cc
 )
 
 find_package(Qt6 COMPONENTS Widgets REQUIRED)

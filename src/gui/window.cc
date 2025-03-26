@@ -8,6 +8,7 @@
 using namespace Reaction;
 using namespace Reaction::Utils;
 
+
 MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
     props = new AppProps();
     props->application_name = "reaction!";
@@ -22,9 +23,13 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
 
     geometry = new Geometry();
     geometry->moveCenter(this);
+
+    label = new Gui::GuiLabel();
+    label->setLabel(this, "Drive Properties", 10, 1, 100, 30);
 }
 
 MainWindow::~MainWindow() {
     delete props;
     delete geometry;
+    delete label;
 }

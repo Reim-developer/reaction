@@ -1,0 +1,51 @@
+name: CMake with GTK-4 and Clang
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Clang and GTK-4 dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang libgtk-4-dev pkg-config ninja-build
+      
+    - name: Configure CMake with Clang and GTK-4
+      env:
+        CC: clang
+        CXX: clang++
+      run: |
+        cmake -B ${{github.workspace}}/build \
+          -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+          -DCMAKE_C_COMPILER=clang \
+          -DCMAKE_CXX_COMPILER=clang++ \
+          -G Ninja
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build
+      run: ctest -C ${{env.BUILD_TYPE}}
+
+    - name: Package Release Binary
+      run: |
+        mkdir -p ${{github.workspace}}/release
+        cp ${{github.workspace}}/build/main ${{github.workspace}}/release/
+  
+    - name: Upload Release Binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: gtk4-clang-release-binary
+        path: ${{github.workspace}}/release/

@@ -6,6 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(
     SOURCE_FILE
     src/main.cc
+    src/mainWindow.hpp
+
+    src/utils/utils.hpp
     src/gui/window.cc
 )
 

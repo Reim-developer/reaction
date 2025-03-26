@@ -3,14 +3,13 @@
 #include "../utils/utils.hpp"
 #include <QtWidgets/QWidget>
 #include <QtCore/QString>
-#include <QtWidgets/QApplication>
 #include <QtWidgets/QMainWindow>
-#include <QtGui/QScreen>
 
-using namespace ReactionUtils;
+using namespace Reaction;
+using namespace Reaction::Utils;
 
 MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
-    AppProps *props = new AppProps();
+    props = new AppProps();
     props->application_name = "reaction!";
     props->application_version = "1.0.0";
 
@@ -20,10 +19,12 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
 
     setWindowTitle(title_fmt);
     resize(800, 600);
-    
-    Geometry::moveCenter(this);
+
+    geometry = new Geometry();
+    geometry->moveCenter(this);
 }
 
 MainWindow::~MainWindow() {
-
+    delete props;
+    delete geometry;
 }

@@ -1,4 +1,4 @@
-name: CMake with GTK-4 and Clang
+name: CMake with Qt6 and Clang
 
 on:
   push:
@@ -16,12 +16,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install Clang and GTK-4 dependencies
+    - name: Install Clang and Qt6 dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y clang libgtk-4-dev pkg-config ninja-build
-      
-    - name: Configure CMake with Clang and GTK-4
+        sudo apt-get install -y clang qt6-base-dev qt6-tools-dev libgl1-mesa-dev ninja-build cmake
+
+    - name: Configure CMake with Clang and Qt6
       env:
         CC: clang
         CXX: clang++
@@ -43,9 +43,9 @@ jobs:
       run: |
         mkdir -p ${{github.workspace}}/release
         cp ${{github.workspace}}/build/main ${{github.workspace}}/release/
-  
+
     - name: Upload Release Binary
       uses: actions/upload-artifact@v4
       with:
-        name: gtk4-clang-release-binary
+        name: qt6-clang-release-binary
         path: ${{github.workspace}}/release/

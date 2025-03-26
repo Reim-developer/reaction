@@ -3,8 +3,11 @@
 #include <QtWidgets/QMainWindow>
 #include "common/props.hpp"
 #include "utils/utils.hpp"
+#include "gui/include/label.hpp"
 
+using namespace Reaction;
 using namespace Reaction::Utils;
+
 
 namespace Reaction {
     class MainWindow : public QMainWindow {
@@ -17,6 +20,7 @@ namespace Reaction {
     private:
         AppProps *props;
         Geometry *geometry;
+        Gui::GuiLabel *label;
     };
 }
 #endif // mainWindow_HPP

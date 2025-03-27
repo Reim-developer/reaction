@@ -1,4 +1,5 @@
 #include "include/label.hpp"
+#include <QtGui/QFontMetrics>
 
 using namespace Reaction::Gui;
 
@@ -9,4 +10,15 @@ QLabel *GuiLabel::setLabel(QWidget *widget, const QString &text,  const int x_lo
         label->setGeometry(x_loc, y_loc, width, height);
 
         return label;
+}
+
+void GuiLabelUtils::setLabelFixedSize(QLabel *label, const int size) {
+    QFont font = label->font();
+    font.setPointSize(size);
+    label->setFont(font);
+
+    QFontMetrics metrics(font);
+    QSize textLabelSize = metrics.size(Qt::TextSingleLine, label->text());
+
+    label->setFixedSize(textLabelSize);
 }

@@ -19,16 +19,19 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
         props->application_version);
 
     setWindowTitle(title_fmt);
-    resize(800, 600);
+    setFixedSize(800, 600);
 
     geometry = new Geometry();
     geometry->moveCenter(this);
 
     guiLabel = new Gui::GuiLabel();
-    QLabel *drive_props = guiLabel->setLabel(this, "Drive Properties", 10, 1, 100, 30);
+    QLabel *drive_props = guiLabel->setLabel(this, "Drive Properties", 10, 10, 100, 30);
 
     guiLabelUtils = new Gui::GuiLabelUtils();
-    guiLabelUtils->setLabelFixedSize(drive_props, 20);
+    guiLabelUtils->setLabelFixedSize(drive_props, 15);
+
+    guiDropbox = new Gui::GuiDropbox();
+    guiDropbox->setComboBox(this, "No device found", 10, 40, 120, 30);
 }
 
 MainWindow::~MainWindow() {
@@ -36,4 +39,5 @@ MainWindow::~MainWindow() {
     delete geometry;
     delete guiLabel;
     delete guiLabelUtils;
+    delete guiDropbox;
 }

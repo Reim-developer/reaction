@@ -25,13 +25,14 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
     geometry->moveCenter(this);
 
     guiLabel = new Gui::GuiLabel();
-    QLabel *drive_props = guiLabel->setLabel(this, "Drive Properties", 10, 10, 100, 30);
+    QLabel *driveProps = guiLabel->setLabel(this, "Drive Properties", 10, 10, 100, 30);
 
     guiLabelUtils = new Gui::GuiLabelUtils();
-    guiLabelUtils->setLabelFixedSize(drive_props, 15);
+    guiLabelUtils->setLabelFixedSize(driveProps, 15);
 
     guiDropbox = new Gui::GuiDropbox();
-    guiDropbox->setComboBox(this, "No device found", 10, 40, 120, 30);
+    QComboBox *deviceList = guiDropbox->setComboBox(this, "No device found", 10, 40, 120, 30);
+    static_cast<Gui::GuiDropboxStyle*>(deviceList)->setTransparent(true);
 }
 
 MainWindow::~MainWindow() {

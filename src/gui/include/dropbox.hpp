@@ -13,6 +13,19 @@ namespace Reaction::Gui {
             const int width, const int height
         );
     };
+
+    class GuiDropboxStyle : public QComboBox {
+    Q_OBJECT
+        public:
+            using QComboBox::QComboBox;
+            void setTransparent(bool enable);
+
+        protected:
+            void paintEvent(QPaintEvent *paintEvent) override;
+
+        private:
+            bool transparent = false;
+    };
 }
 
 #endif // DROPBOX_HPP

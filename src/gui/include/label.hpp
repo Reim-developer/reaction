@@ -1,5 +1,5 @@
 #ifndef LABEL_HPP
-#define LABEl_HPP
+#define LABEL_HPP
 
 #include <QtWidgets/QLabel>
 #include <QtCore/QString>

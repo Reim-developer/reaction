@@ -14,6 +14,10 @@ namespace Reaction::Gui {
             const int width, const int height
         );
     };
+    class GuiLabelUtils {
+        public:
+        void setLabelFixedSize(QLabel *label, const int size);
+    };
 }
 
 #endif // LABEL_HPP

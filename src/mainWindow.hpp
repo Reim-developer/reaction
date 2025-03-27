@@ -20,7 +20,8 @@ namespace Reaction {
     private:
         AppProps *props;
         Geometry *geometry;
-        Gui::GuiLabel *label;
+        Gui::GuiLabel *guiLabel;
+        Gui::GuiLabelUtils *guiLabelUtils;
     };
 }
 #endif // mainWindow_HPP

@@ -24,12 +24,16 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
     geometry = new Geometry();
     geometry->moveCenter(this);
 
-    label = new Gui::GuiLabel();
-    label->setLabel(this, "Drive Properties", 10, 1, 100, 30);
+    guiLabel = new Gui::GuiLabel();
+    QLabel *drive_props = guiLabel->setLabel(this, "Drive Properties", 10, 1, 100, 30);
+
+    guiLabelUtils = new Gui::GuiLabelUtils();
+    guiLabelUtils->setLabelFixedSize(drive_props, 20);
 }
 
 MainWindow::~MainWindow() {
     delete props;
     delete geometry;
-    delete label;
+    delete guiLabel;
+    delete guiLabelUtils;
 }

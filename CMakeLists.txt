@@ -12,7 +12,12 @@ set(
     src/utils/utils.cc
 
     src/gui/window.cc
+
     src/gui/label.cc
+    src/gui/include/label.hpp
+
+    src/gui/include/dropbox.hpp
+    src/gui/dropbox.cc
 )
 
 find_package(Qt6 COMPONENTS Widgets REQUIRED)

@@ -7,10 +7,7 @@ namespace Reaction::Common {
     class Signal : public QObject {
         Q_OBJECT
         public:
-            Signal(QObject *object) : QObject(object) {}
-
-        public slots:
-            void openFileDialog();
+             Signal(QObject *object) : QObject(object) {}
     };
 }
 

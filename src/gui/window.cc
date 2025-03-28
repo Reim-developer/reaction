@@ -58,11 +58,11 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
     guiButtons->setButtons(this, "Device not found? Reload", 300, 60, 200, 30);
     guiButtons->setButtons(this, "Choose device manually",530, 60, 200, 30);
 
-    QPushButton *openBootFileButton  = guiButtons->setButtons(this, "Choose boot file", 300, 200, 200, 30);
+    QPushButton *openBootFileButton  = guiButtons->setButtons(this, "Choose boot file", 300, 130, 200, 30);
     
     signal = new Signal(this);
     context = new Context();
-    context->setOpenFileContext(openBootFileButton, signal);
+    context->setOpenFileContext(openBootFileButton, signal, this, bootSelctionList);
 }
 
 MainWindow::~MainWindow() {

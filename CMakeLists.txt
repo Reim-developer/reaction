@@ -23,11 +23,10 @@ set(
     src/gui/dropbox.cc
 
     src/common/include/signal.hpp
-    src/common/include/context.hpp
     src/common/include/props.hpp
 
-    src/common/signal.cc
     src/common/context.cc
+    src/common/include/context.hpp
 )
 
 find_package(Qt6 COMPONENTS Widgets REQUIRED)

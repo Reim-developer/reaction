@@ -16,6 +16,9 @@ set(
     src/gui/label.cc
     src/gui/include/label.hpp
 
+    src/gui/buttons.cc
+    src/gui/include/buttons.hpp
+
     src/gui/include/dropbox.hpp
     src/gui/dropbox.cc
 )
@@ -24,4 +27,7 @@ find_package(Qt6 COMPONENTS Widgets REQUIRED)
 set(CMAKE_AUTOMOC ON)
 
 add_executable(main ${SOURCE_FILE})
+
+target_compile_options(main PRIVATE "$<$<CXX_COMPILER_ID:Clang>:-fno-direct-access-external-data>")
+
 target_link_libraries(main Qt6::Widgets)

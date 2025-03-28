@@ -4,11 +4,12 @@
 #include "QtWidgets/qmainwindow.h"
 #include "QtWidgets/qpushbutton.h"
 #include "signal.hpp"
+#include "state.hpp"
 
 namespace Reaction::Common {
     class Context {
         public:
-            void setOpenFileContext(QPushButton *button, Signal *signal, QMainWindow *windows, QComboBox *comboBox);
+            void setOpenFileContext(QPushButton *button, Signal *signal, QMainWindow *windows, QComboBox *comboBox, State *state);
     };
 }
 

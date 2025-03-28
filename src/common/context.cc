@@ -1,7 +1,6 @@
 #include "include/context.hpp"
 #include "QtCore/qdir.h"
 #include "QtCore/qfileinfo.h"
-#include "QtCore/qlogging.h"
 #include "QtWidgets/qcombobox.h"
 #include "QtWidgets/qfiledialog.h"
 #include "QtWidgets/qmainwindow.h"

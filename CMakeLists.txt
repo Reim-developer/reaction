@@ -13,6 +13,9 @@ set(
 
     src/gui/window.cc
 
+    src/gui/init.cc
+    src/gui/init.hpp
+
     src/gui/label.cc
     src/gui/include/label.hpp
 

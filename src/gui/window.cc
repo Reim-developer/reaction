@@ -1,13 +1,13 @@
 #include "../mainWindow.hpp"
 #include "../common/props.hpp"
 #include "../utils/utils.hpp"
+#include "include/buttons.hpp"
 #include <QtWidgets/QWidget>
 #include <QtCore/QString>
 #include <QtWidgets/QMainWindow>
 
 using namespace Reaction;
 using namespace Reaction::Utils;
-
 
 MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
     props = new AppProps();
@@ -31,8 +31,12 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
     guiLabelUtils->setLabelFixedSize(driveProps, 15);
 
     guiDropbox = new Gui::GuiDropbox();
-    QComboBox *deviceList = guiDropbox->setComboBox(this, "No device found", 10, 40, 120, 30);
+    QComboBox *deviceList = guiDropbox->setComboBox(this, "No device found", 10, 40, 150, 30);
     static_cast<Gui::GuiDropboxStyle*>(deviceList)->setTransparent(true);
+
+    guiButtons = new Gui::GuiButtons();
+    guiButtons->setButtons(this, "Device not found? Reload", 300, 40, 200, 30);
+    guiButtons->setButtons(this, "Choose device manually",530, 40, 200, 30);
 }
 
 MainWindow::~MainWindow() {
@@ -41,4 +45,5 @@ MainWindow::~MainWindow() {
     delete guiLabel;
     delete guiLabelUtils;
     delete guiDropbox;
+    delete guiButtons;
 }

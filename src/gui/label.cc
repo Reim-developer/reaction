@@ -3,22 +3,23 @@
 
 using namespace Reaction::Gui;
 
-QLabel *GuiLabel::setLabel(QWidget *widget, const QString &text,  const int x_loc, const int y_loc, 
-    const int width, const int height) {
+QLabel *GuiLabel::setLabel(QWidget *widget, const QString &text,
+                           const int x_loc, const int y_loc, const int width,
+                           const int height) {
 
-        QLabel *label = new QLabel(text, widget);
-        label->setGeometry(x_loc, y_loc, width, height);
+  QLabel *label = new QLabel(text, widget);
+  label->setGeometry(x_loc, y_loc, width, height);
 
-        return label;
+  return label;
 }
 
 void GuiLabelUtils::setLabelFixedSize(QLabel *label, const int size) {
-    QFont font = label->font();
-    font.setPointSize(size);
-    label->setFont(font);
+  QFont font = label->font();
+  font.setPointSize(size);
+  label->setFont(font);
 
-    QFontMetrics metrics(font);
-    QSize textLabelSize = metrics.size(Qt::TextSingleLine, label->text());
+  QFontMetrics metrics(font);
+  QSize textLabelSize = metrics.size(Qt::TextSingleLine, label->text());
 
-    label->setFixedSize(textLabelSize);
+  label->setFixedSize(textLabelSize);
 }

@@ -3,6 +3,6 @@
 
 using namespace Reaction::Common;
 
-void Signal::openFileDialog() {
+/* void Signal::openFileDialog() {
     qDebug("test");
-}
+} */

@@ -6,12 +6,13 @@
 #include "QtWidgets/qmainwindow.h"
 #include "QtWidgets/qpushbutton.h"
 #include "include/signal.hpp"
+#include "include/state.hpp"
 #include <QtWidgets/QFileDialog>
 
 using namespace Reaction::Common;
 
 void Context::setOpenFileContext(QPushButton *button, Signal *signal,
-                                 QMainWindow *windows, QComboBox *comboBox) {
+                                 QMainWindow *windows, QComboBox *comboBox, State *state) {
   QObject::connect(button, &QPushButton::clicked, signal, [=]() {
     QString filePath = QFileDialog::getOpenFileName(windows, "Choose boot file",
                                                     QDir::homePath(),
@@ -22,6 +23,8 @@ void Context::setOpenFileContext(QPushButton *button, Signal *signal,
                     QString fileName = fileInfo.fileName();
                     comboBox->clear();
                     comboBox->addItem(fileName);
+                    
+                    state->isoFilePath = filePath;
             }
   });
 }

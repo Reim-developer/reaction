@@ -3,32 +3,31 @@
 
 using namespace Reaction::Gui;
 
-QComboBox *GuiDropbox::setComboBox(
-    QWidget *widget, const QString &text,
-    const int x_loc, const int y_loc,
-    const int width, const int height) {
+QComboBox *GuiDropbox::setComboBox(QWidget *widget, const QString &text,
+                                   const int x_loc, const int y_loc,
+                                   const int width, const int height) {
 
-    QComboBox *comboBox = new GuiDropboxStyle(widget);
-    comboBox->addItem(text);
-    comboBox->setGeometry(x_loc, y_loc, width, height);
+  QComboBox *comboBox = new GuiDropboxStyle(widget);
+  comboBox->addItem(text);
+  comboBox->setGeometry(x_loc, y_loc, width, height);
 
-    return comboBox;
+  return comboBox;
 }
 
 void GuiDropboxStyle::setTransparent(bool enable) {
-    transparent = enable;
-    update();
+  transparent = enable;
+  update();
 }
 
 void GuiDropboxStyle::paintEvent(QPaintEvent *paintEvent) {
-    if(transparent) {
-        QStyleOptionComboBox optionComboBox;
-        initStyleOption(&optionComboBox);
+  if (transparent) {
+    QStyleOptionComboBox optionComboBox;
+    initStyleOption(&optionComboBox);
 
-        QPainter painter(this);
-        optionComboBox.state &= ~(QStyle::State_HasFocus | QStyle::State_MouseOver);
-        style()->drawControl(QStyle::CE_ComboBoxLabel, &optionComboBox, &painter, this);
-    } else {
-        QComboBox::paintEvent(paintEvent);
-    }
+    QPainter painter(this);
+    optionComboBox.state &= ~(QStyle::State_HasFocus | QStyle::State_MouseOver);
+    style()->drawControl(QStyle::CE_ComboBoxLabel, &optionComboBox, &painter, this);
+  } else {
+    QComboBox::paintEvent(paintEvent);
+  }
 }

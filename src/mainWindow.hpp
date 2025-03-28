@@ -5,6 +5,7 @@
 #include "utils/utils.hpp"
 #include "gui/include/label.hpp"
 #include "gui/include/dropbox.hpp"
+#include "gui/include/buttons.hpp"
 
 using namespace Reaction;
 using namespace Reaction::Utils;
@@ -24,6 +25,7 @@ namespace Reaction {
         Gui::GuiLabel *guiLabel;
         Gui::GuiLabelUtils *guiLabelUtils;
         Gui::GuiDropbox *guiDropbox;
+        Gui::GuiButtons *guiButtons;
     };
 }
 #endif // mainWindow_HPP

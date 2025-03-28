@@ -7,7 +7,7 @@ using namespace Reaction::Utils;
 
 void Geometry::moveCenter(QWidget *window) {
     if(!window)
-    return;
+        return;
 
     QScreen *screen = QApplication::primaryScreen();
     if(!screen)

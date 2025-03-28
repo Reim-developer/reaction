@@ -3,10 +3,8 @@
 #include <QtWidgets/QMainWindow>
 #include "common/include/context.hpp"
 #include "common/include/props.hpp"
+#include "common/include/state.hpp"
 #include "utils/utils.hpp"
-#include "gui/include/label.hpp"
-#include "gui/include/dropbox.hpp"
-#include "gui/include/buttons.hpp"
 #include "common/include/signal.hpp"
 
 using namespace Reaction;
@@ -19,6 +17,7 @@ namespace Reaction {
 
     public:
         explicit MainWindow(QWidget *window = nullptr);
+        void initUI();
         ~MainWindow();
 
     private:
@@ -27,12 +26,7 @@ namespace Reaction {
 
         Signal *signal;
         Context *context;
-
-        Gui::GuiLabel *guiLabel;
-        Gui::GuiLabelUtils *guiLabelUtils;
-        Gui::GuiDropbox *guiDropbox;
-        Gui::GuiButtons *guiButtons;
-
+        State *state;
     };
 }
 #endif // mainWindow_HPP

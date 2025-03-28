@@ -1,7 +1,10 @@
 #include "../mainWindow.hpp"
-#include "../common/props.hpp"
+#include "../common/include/props.hpp"
+#include "../common/include/signal.hpp"
 #include "../utils/utils.hpp"
+#include "QtCore/qobject.h"
 #include "QtWidgets/qcombobox.h"
+#include "QtWidgets/qpushbutton.h"
 #include "include/buttons.hpp"
 #include "include/dropbox.hpp"
 #include <QtWidgets/QWidget>
@@ -12,6 +15,7 @@
 using namespace std;
 using namespace Reaction;
 using namespace Reaction::Utils;
+using namespace Reaction::Common;
 
 MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
     props = new AppProps();
@@ -50,9 +54,15 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
     static_cast<Gui::GuiDropboxStyle*>(selectPartition)->setTransparent(true);
 
     guiButtons = new Gui::GuiButtons();
-    guiButtons->setButtons(this, "Device not found? Reload", 300, 40, 200, 30);
-    guiButtons->setButtons(this, "Choose device manually",530, 40, 200, 30);
-    guiButtons->setButtons(this, "Choose boot file", 300, 200, 200, 30);
+
+    guiButtons->setButtons(this, "Device not found? Reload", 300, 60, 200, 30);
+    guiButtons->setButtons(this, "Choose device manually",530, 60, 200, 30);
+
+    QPushButton *openBootFileButton  = guiButtons->setButtons(this, "Choose boot file", 300, 200, 200, 30);
+    
+    signal = new Signal(this);
+    context = new Context();
+    context->setOpenFileContext(openBootFileButton, signal);
 }
 
 MainWindow::~MainWindow() {
@@ -62,4 +72,6 @@ MainWindow::~MainWindow() {
     delete guiLabelUtils;
     delete guiDropbox;
     delete guiButtons;
+    delete signal;
+    delete context;
 }

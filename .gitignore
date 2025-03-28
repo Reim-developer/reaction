@@ -2,3 +2,4 @@
 build
 .cache
 *.iso
+compile_flags.txt

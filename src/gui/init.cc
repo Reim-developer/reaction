@@ -29,11 +29,12 @@ void InitUI::setup(MainWindow *window, Signal *signal, State *state, Context *co
     static_cast<Gui::GuiDropboxStyle*>(selectPartition)->setTransparent(true);
 
     GuiButtons *guiButtons = new GuiButtons();
-    guiButtons->setButtons(window, "Device not found? Reload", 300, 60, 200, 30);
+    QPushButton *reloadDiskButton = guiButtons->setButtons(window, "Device not found? Reload", 300, 60, 200, 30);
     QPushButton *openDeviceButton = guiButtons->setButtons(window, "Choose device manually",530, 60, 200, 30);
 
     QPushButton *openBootFileButton  = guiButtons->setButtons(window, "Choose boot file", 300, 130, 200, 30);
 
     context->setOpenFileContext(openBootFileButton, signal, window, bootSelctionList, state);
     context->setOpenDeviceContext(openDeviceButton, signal, window, deviceList, state);
+    context->setReloadDiskContext(reloadDiskButton, signal, deviceList, state);
 }

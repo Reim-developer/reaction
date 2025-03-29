@@ -10,6 +10,7 @@ namespace Reaction::Common {
     class Context {
         public:
             void setOpenFileContext(QPushButton *button, Signal *signal, QMainWindow *windows, QComboBox *comboBox, State *state);
+            void setOpenDeviceContext(QPushButton *button, Signal *signal, QMainWindow *windows, QComboBox *comboBox, State *state);
     };
 }
 

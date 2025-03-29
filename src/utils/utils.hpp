@@ -13,6 +13,7 @@ namespace Reaction::Utils {
             void moveCenter(QWidget *window);
             QString getDevicePath(const QString &device);
             void showOpenDiskDialog(QWidget *window, State *state);
+            void reloadDiskInfo(State *state);
     };
 }
 

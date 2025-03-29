@@ -24,8 +24,8 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
 
     setWindowTitle(title_fmt);
     setFixedSize(800, 600);
-    geometry = new Geometry();
-    geometry->moveCenter(this);
+    utils = new class Utils();
+    utils->moveCenter(this);
     
     signal = new Signal(this);
     state = new State();
@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *window) : QMainWindow(window) {
 
 MainWindow::~MainWindow() {
     delete props;
-    delete geometry;
+    delete utils;
     delete signal;
     delete context;
     delete state;

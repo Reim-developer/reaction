@@ -1,9 +1,11 @@
 #include "init.hpp"
+#include "QtWidgets/qpushbutton.h"
 #include "include/buttons.hpp"
 #include "include/dropbox.hpp"
 #include "include/label.hpp"
 
 using namespace Reaction::Gui;
+
 void InitUI::setup(MainWindow *window, Signal *signal, State *state, Context *context) {
     GuiLabel *guiLabel = new GuiLabel();
     QLabel *deviceSelect = guiLabel->setLabel(window, "Device Selection:", 10, 30, 100, 30);
@@ -28,9 +30,10 @@ void InitUI::setup(MainWindow *window, Signal *signal, State *state, Context *co
 
     GuiButtons *guiButtons = new GuiButtons();
     guiButtons->setButtons(window, "Device not found? Reload", 300, 60, 200, 30);
-    guiButtons->setButtons(window, "Choose device manually",530, 60, 200, 30);
+    QPushButton *openDeviceButton = guiButtons->setButtons(window, "Choose device manually",530, 60, 200, 30);
 
     QPushButton *openBootFileButton  = guiButtons->setButtons(window, "Choose boot file", 300, 130, 200, 30);
 
     context->setOpenFileContext(openBootFileButton, signal, window, bootSelctionList, state);
+    context->setOpenDeviceContext(openDeviceButton, signal, window, deviceList, state);
 }

@@ -6,6 +6,8 @@ namespace Reaction::Common {
     class State {
         public:
             QString isoFilePath;
+            QString deviceName;
+            QString devicePath;
     };
 }
 

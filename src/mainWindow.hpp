@@ -22,7 +22,7 @@ namespace Reaction {
 
     private:
         AppProps *props;
-        Geometry *geometry;
+        class Utils *utils;
 
         Signal *signal;
         Context *context;

@@ -97,7 +97,7 @@ void Utils::showOpenDiskDialog(QWidget *window, State *state) {
         if(listWidget.currentItem()) {
             QString selectedItem = listWidget.currentItem()->text();
             state->deviceName = deviceMap[selectedItem];
-            
+
             state->devicePath = getDevicePath(state->deviceName);
             dialog.accept();
         }
@@ -108,4 +108,29 @@ void Utils::showOpenDiskDialog(QWidget *window, State *state) {
     });
 
    dialog.exec();
+}
+
+void Utils::reloadDiskInfo(State *state) {
+    QDir dir("/sys/block");
+    QStringList stringList = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+    QString deviceAbsolutePath;
+    QString defaultDeviceName;
+
+    state->deviceMap.clear();
+    for(const QString &device : stringList ) {
+       QString modelPath = "/sys/block/" + device + "/device/model";
+       QString devicePath = "/sys/block/" + device;
+
+       QFile fileModel(modelPath);
+       defaultDeviceName = device;
+
+       if(fileModel.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream textStream(&fileModel);
+            defaultDeviceName += " | " + textStream.readLine().trimmed();
+            fileModel.close();
+       }
+       deviceAbsolutePath = getDevicePath(device);
+
+       state->deviceMap[defaultDeviceName] = deviceAbsolutePath;
+    }
 }

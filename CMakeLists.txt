@@ -33,10 +33,13 @@ set(
 )
 
 find_package(Qt6 COMPONENTS Widgets REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(UDEV REQUIRED libudev)
 set(CMAKE_AUTOMOC ON)
 
 add_executable(main ${SOURCE_FILE})
 
 target_compile_options(main PRIVATE "$<$<CXX_COMPILER_ID:Clang>:-fno-direct-access-external-data>")
 
-target_link_libraries(main Qt6::Widgets)
+target_link_libraries(main Qt6::Widgets ${UDEV_LIBRARIES})
+target_include_directories(main PRIVATE ${UDEV_INCLUDE_DIR})

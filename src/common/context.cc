@@ -3,6 +3,7 @@
 #include "QtCore/qfileinfo.h"
 #include "../utils/utils.hpp"
 #include "QtCore/qobject.h"
+#include "QtCore/qstringliteral.h"
 #include "QtWidgets/qcombobox.h"
 #include "QtWidgets/qfiledialog.h"
 #include "QtWidgets/qmainwindow.h"
@@ -39,10 +40,13 @@ void Context::setOpenDeviceContext(QPushButton *button, Signal *signal,
 
   QObject::connect(button, &QPushButton::clicked, signal, [=]() { 
               class Utils *utils = new class Utils();
-              QString deviceName = utils->showOpenDiskDialog(windows);
-              if(!deviceName.isEmpty()) {
+              utils->showOpenDiskDialog(windows, state);
+      
+              if(!state->deviceName.isEmpty()) {
                   comboBox->clear();
-                  comboBox->addItem(deviceName);
+                  QString diskInfo = QStringLiteral("%1 | %2").arg(state->deviceName).arg(state->devicePath);
+                  comboBox->addItem(diskInfo);
               }
+              delete utils;
   });
 }

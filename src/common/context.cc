@@ -1,7 +1,7 @@
 #include "include/context.hpp"
+#include "../utils/utils.hpp"
 #include "QtCore/qdir.h"
 #include "QtCore/qfileinfo.h"
-#include "../utils/utils.hpp"
 #include "QtCore/qobject.h"
 #include "QtCore/qstringliteral.h"
 #include "QtWidgets/qcombobox.h"
@@ -38,15 +38,37 @@ void Context::setOpenDeviceContext(QPushButton *button, Signal *signal,
                                    QMainWindow *windows, QComboBox *comboBox,
                                    State *state) {
 
-  QObject::connect(button, &QPushButton::clicked, signal, [=]() { 
-              class Utils *utils = new class Utils();
-              utils->showOpenDiskDialog(windows, state);
-      
-              if(!state->deviceName.isEmpty()) {
-                  comboBox->clear();
-                  QString diskInfo = QStringLiteral("%1 | %2").arg(state->deviceName).arg(state->devicePath);
-                  comboBox->addItem(diskInfo);
-              }
-              delete utils;
+  QObject::connect(button, &QPushButton::clicked, signal, [=]() {
+    class Utils *utils = new class Utils();
+    utils->showOpenDiskDialog(windows, state);
+
+    if (!state->deviceName.isEmpty()) {
+      comboBox->clear();
+      QString diskInfo = QStringLiteral("%1 | %2")
+                             .arg(state->deviceName)
+                             .arg(state->devicePath);
+      comboBox->addItem(diskInfo);
+    }
+    utils->reloadDiskInfo(state);
+    delete utils;
+  });
+}
+
+void Context::setReloadDiskContext(QPushButton *button, Signal *signal,
+                                   QComboBox *comboBox, State *state) {
+  QObject::connect(button, &QPushButton::clicked, signal, [=]() {
+    class Utils *utils = new class Utils();
+    utils->reloadDiskInfo(state);
+
+    comboBox->clear();
+    if (!state->deviceMap.isEmpty()) {
+      for (auto it = state->deviceMap.constBegin();
+           it != state->deviceMap.constEnd(); it++) {
+        QString fmtText = QStringLiteral("%1 %2").arg(it.key()).arg(it.value());
+
+        comboBox->addItem(fmtText);
+      }
+    }
+    delete utils;
   });
 }

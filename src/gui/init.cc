@@ -48,4 +48,5 @@ void InitUI::setup(MainWindow *window, Signal *signal, State *state, Context *co
     context->setOpenFileContext(openBootFileButton, signal, window, bootSelctionList, state);
     context->setOpenDeviceContext(openDeviceButton, signal, window, deviceList, state);
     context->setReloadDiskContext(reloadDiskButton, signal, deviceList, state);
+    context->setStartContext(startButton, window, signal, state);
 }

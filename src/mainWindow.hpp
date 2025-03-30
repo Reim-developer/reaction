@@ -1,6 +1,7 @@
 #ifndef mainWindow_HPP
 #define mainWindow_HPP
 #include <QtWidgets/QMainWindow>
+#include "QtWidgets/qwidget.h"
 #include "common/include/context.hpp"
 #include "common/include/props.hpp"
 #include "common/include/state.hpp"
@@ -19,6 +20,9 @@ namespace Reaction {
         explicit MainWindow(QWidget *window = nullptr);
         void initUI();
         ~MainWindow();
+
+    protected:
+        void showEvent(QShowEvent *event) override;
 
     private:
         AppProps *props;

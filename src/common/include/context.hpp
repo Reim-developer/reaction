@@ -19,6 +19,7 @@ namespace Reaction::Common {
                                       QComboBox *comboBox, State *state);
             void getCurrentItemContext(QComboBox *comboBox, Signal *singal, State *state);
             void autoDetectDevice(QMainWindow *windows, QComboBox *comboBox, State *state);
+            void setStartContext(QPushButton *button, QMainWindow *windows, Signal *sginal, State *state);
       };
   
 } // namespace Reaction::Common

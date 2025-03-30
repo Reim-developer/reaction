@@ -3,6 +3,7 @@
 #include "QtCore/qdir.h"
 #include "QtCore/qfileinfo.h"
 #include "QtCore/qobject.h"
+#include "QtCore/qoverload.h"
 #include "QtCore/qstringliteral.h"
 #include "QtWidgets/qcombobox.h"
 #include "QtWidgets/qfiledialog.h"
@@ -11,7 +12,9 @@
 #include "include/signal.hpp"
 #include "include/state.hpp"
 #include <QtWidgets/QFileDialog>
+#include <iterator>
 
+using namespace std;
 using namespace Reaction::Common;
 using namespace Reaction::Utils;
 
@@ -71,4 +74,66 @@ void Context::setReloadDiskContext(QPushButton *button, Signal *signal,
     }
     delete utils;
   });
+}
+
+void Context::getCurrentItemContext(QComboBox *comboBox, Signal *signal,
+                                    State *state) {
+  int currentIndex = comboBox->currentIndex();
+
+  if (currentIndex >= comboBox->currentIndex() &&
+      currentIndex < state->deviceMap.size()) {
+    auto it = next(state->deviceMap.constBegin(), currentIndex);
+    state->deviceName = it.key();
+    state->devicePath = it.value();
+  }
+
+  QObject::connect(comboBox,
+                   QOverload<int>::of(&QComboBox::currentIndexChanged),
+                   [comboBox, state](int index) {
+                     if (index >= 0 && index < state->deviceMap.size()) {
+                       auto it = next(state->deviceMap.constBegin(), index);
+                       state->deviceName = it.key();
+                       state->devicePath = it.value();
+                     }
+                   });
+}
+
+void Context::autoDetectDevice(QMainWindow *windows, QComboBox *comboBox,
+                               State *state) {
+  class Utils *utils = new class Utils();
+  utils->reloadDiskInfo(state);
+
+  comboBox->clear();
+  if (state->deviceMap.isEmpty()) {
+    comboBox->addItem("No device found");
+    state->deviceName.clear();
+    state->devicePath.clear();
+  } else {
+    for (auto it = state->deviceMap.constBegin();
+         it != state->deviceMap.constEnd(); it++) {
+      QString fmtText = QStringLiteral("%1 %2").arg(it.key()).arg(it.value());
+      comboBox->addItem(fmtText);
+
+      int currentIndex = comboBox->currentIndex();
+
+      if (currentIndex >= comboBox->currentIndex() &&
+          currentIndex < state->deviceMap.size()) {
+        auto it = next(state->deviceMap.constBegin(), currentIndex);
+
+        state->deviceName = it.key();
+        state->devicePath = it.value();
+      }
+
+      QObject::connect(comboBox,
+                       QOverload<int>::of(&QComboBox::currentIndexChanged),
+                       [comboBox, state](int index) {
+                         if (index >= 0 && index < state->deviceMap.size()) {
+                           auto it = next(state->deviceMap.constBegin(), index);
+                           state->deviceName = it.key();
+                           state->devicePath = it.value();
+                         }
+                       });
+    }
+    comboBox->setCurrentIndex(0);
+  }
 }

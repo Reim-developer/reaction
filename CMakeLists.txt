@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(reaction)
+project(reaction LANGUAGES C CXX)
+set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
 
 set(
@@ -30,6 +31,8 @@ set(
 
     src/common/context.cc
     src/common/include/context.hpp
+
+    src/common/include/message.h
 )
 
 find_package(Qt6 COMPONENTS Widgets REQUIRED)

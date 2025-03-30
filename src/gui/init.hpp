@@ -6,6 +6,7 @@ namespace Reaction::Gui {
     class InitUI {
         public:
             void setup(MainWindow *mainWindow, Signal *signal, State *state, Context *context);
+
     };
 }
 

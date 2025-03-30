@@ -5,12 +5,16 @@
 #include "QtCore/qobject.h"
 #include "QtCore/qstringliteral.h"
 #include "QtWidgets/qcombobox.h"
+#include "QtWidgets/qdialog.h"
 #include "QtWidgets/qfiledialog.h"
 #include "QtWidgets/qmainwindow.h"
+#include "QtWidgets/qmessagebox.h"
 #include "QtWidgets/qpushbutton.h"
+#include "include/message.h"
 #include "include/signal.hpp"
 #include "include/state.hpp"
 #include <QtWidgets/QFileDialog>
+#include <QtWidgets/QMessageBox>
 #include <iterator>
 
 using namespace std;
@@ -86,8 +90,7 @@ void Context::getCurrentItemContext(QComboBox *comboBox, Signal *signal,
     state->devicePath = it.value();
   }
 
-  QObject::connect(comboBox,
-                   &QComboBox::currentIndexChanged,
+  QObject::connect(comboBox, &QComboBox::currentIndexChanged,
                    [comboBox, state](int index) {
                      if (index >= 0 && index < state->deviceMap.size()) {
                        auto it = next(state->deviceMap.constBegin(), index);
@@ -123,8 +126,7 @@ void Context::autoDetectDevice(QMainWindow *windows, QComboBox *comboBox,
         state->devicePath = it.value();
       }
 
-      QObject::connect(comboBox,
-                       &QComboBox::currentIndexChanged,
+      QObject::connect(comboBox, &QComboBox::currentIndexChanged,
                        [comboBox, state](int index) {
                          if (index >= 0 && index < state->deviceMap.size()) {
                            auto it = next(state->deviceMap.constBegin(), index);
@@ -135,4 +137,18 @@ void Context::autoDetectDevice(QMainWindow *windows, QComboBox *comboBox,
     }
     comboBox->setCurrentIndex(0);
   }
+}
+
+void Context::setStartContext(QPushButton *button, QMainWindow *windows,
+                              Signal *signal, State *state) {
+  QObject::connect(button, &QPushButton::clicked, [=]() {
+    if (state->deviceName.isEmpty() || state->devicePath.isEmpty()) {
+      QMessageBox::information(windows, "Infomation", DEVICE_NOT_FOUND);
+      return;
+    }
+    if(!QFileInfo::exists(state->devicePath)) {
+      QMessageBox::information(windows, "Infomation", DEVICE_PATH_NOT_FOUND);
+      return;
+    }
+  });
 }

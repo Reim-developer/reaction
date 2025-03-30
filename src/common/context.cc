@@ -3,7 +3,6 @@
 #include "QtCore/qdir.h"
 #include "QtCore/qfileinfo.h"
 #include "QtCore/qobject.h"
-#include <QtCore/QOverload>
 #include "QtCore/qstringliteral.h"
 #include "QtWidgets/qcombobox.h"
 #include "QtWidgets/qfiledialog.h"
@@ -88,7 +87,7 @@ void Context::getCurrentItemContext(QComboBox *comboBox, Signal *signal,
   }
 
   QObject::connect(comboBox,
-                   QOverload<int>::of(&QComboBox::currentIndexChanged),
+                   &QComboBox::currentIndexChanged,
                    [comboBox, state](int index) {
                      if (index >= 0 && index < state->deviceMap.size()) {
                        auto it = next(state->deviceMap.constBegin(), index);
@@ -125,7 +124,7 @@ void Context::autoDetectDevice(QMainWindow *windows, QComboBox *comboBox,
       }
 
       QObject::connect(comboBox,
-                       QOverload<int>::of(&QComboBox::currentIndexChanged),
+                       &QComboBox::currentIndexChanged,
                        [comboBox, state](int index) {
                          if (index >= 0 && index < state->deviceMap.size()) {
                            auto it = next(state->deviceMap.constBegin(), index);

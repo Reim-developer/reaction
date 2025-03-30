@@ -3,7 +3,7 @@
 #include "QtCore/qdir.h"
 #include "QtCore/qfileinfo.h"
 #include "QtCore/qobject.h"
-#include "QtCore/qoverload.h"
+#include <QtCore/QOverload>
 #include "QtCore/qstringliteral.h"
 #include "QtWidgets/qcombobox.h"
 #include "QtWidgets/qfiledialog.h"

@@ -1,4 +1,6 @@
-#include "fat32.h"
+#include "include/fat32.h"
+#include "include/context.h"
+#include <string.h>
 
 RESULT_STATUS create_fat32(struct fat32_params* params) {
     int device = open(params->device, O_RDWR);
@@ -29,10 +31,10 @@ RESULT_STATUS create_fat32(struct fat32_params* params) {
     unsigned long long sectors_per_fat = (total_clusters * 4 + SECTOR_SIZE - 1) / SECTOR_SIZE;
 
     if (total_sectors > (1ULL << 32))
-        return PARTITION_TO_BIG;
+        return PARTITION_TOO_BIG;
     if (total_sectors < 65525) {
         close(device);
-        return PARTITION_TO_SMALL;
+        return PARTITION_TOO_SMALL;
     }
     if (total_clusters > MAX_FAT_32_CLUSTERS) {
         close(device);
@@ -130,7 +132,7 @@ RESULT_STATUS create_fat32(struct fat32_params* params) {
         int write_size = (remaining_sectors > 32) ? 32 : remaining_sectors;
         if (write(device, fat_buffer, write_size * SECTOR_SIZE) != write_size * SECTOR_SIZE) {
             close(device);
-            return WRITE_FAT_FAILED;
+            return WRITE_SECTOR_FAILED;
         }
         remaining_sectors -= write_size;
         memset(fat_buffer, 0, SECTOR_SIZE * 32);
@@ -160,7 +162,7 @@ RESULT_STATUS create_fat32(struct fat32_params* params) {
 
         if (write(device, fat_buffer, write_size * SECTOR_SIZE) != write_size * SECTOR_SIZE) {
             close(device);
-            return WRITE_FAT_FAILED;
+            return WRITE_SECTOR_FAILED;
         }
         remaining_sectors -= write_size;
         memset(fat_buffer, 0, SECTOR_SIZE * 32);

@@ -1,4 +1,7 @@
-#include "core.h"
+#include "include/core.h"
+#include "include/context.h"
+#include "include/fat32.h"
+#include <errno.h>
 
 static RESULT_STATUS get_mount_point(const char *device, char *out_mount, size_t size) {
      FILE *file_t = setmntent("/proc/mounts", "r");
@@ -7,7 +10,7 @@ static RESULT_STATUS get_mount_point(const char *device, char *out_mount, size_t
           if(errno == EPERM || errno == EACCES)
                return NO_PERMIT_OPERATION;
 
-          return GET_MOUNT_ERROR;
+          return GET_MOUNT_FAILED;
      }
 
      struct mntent *mntent_t;
@@ -17,12 +20,12 @@ static RESULT_STATUS get_mount_point(const char *device, char *out_mount, size_t
                out_mount[size - 1] = '\0';
                endmntent(file_t);
      
-               return MOUNT_POINT_FOUND;
+               return GET_MOUNT_SUCCESS;
           }
      }
 
      endmntent(file_t);
-     return MOUNT_POINT_NOT_FOUND;
+     return GET_MOUNT_FAILED;
 }
 
 RESULT_STATUS unmount_device(const char *device) {
@@ -32,7 +35,7 @@ RESULT_STATUS unmount_device(const char *device) {
           device, mount_point, sizeof(mount_point)
      );
 
-     if(get_mount_point_status != MOUNT_POINT_FOUND) 
+     if(get_mount_point_status != GET_MOUNT_SUCCESS) 
           return UNMOUNT_DEVICE_FAILED;
 
      if(umount2(mount_point, MNT_FORCE) == 0) 
@@ -53,12 +56,12 @@ RESULT_STATUS format_device(const char *device) {
    char zero_buffer[512] = {0};
    if(write(fd_status, zero_buffer, sizeof(zero_buffer)) != sizeof(zero_buffer)) {
         close(fd_status);
-        return WRITE_FAILED;
+        return WRITE_DEVICE_FAILED;
    }
 
    if(fsync(fd_status) < 0) {
      close(fd_status);
-     return FILE_SYNC_FAILED;
+     return SYNC_DEVICE_FAILED;
    }
 
    close(fd_status);

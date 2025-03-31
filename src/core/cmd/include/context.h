@@ -3,8 +3,9 @@
 
 typedef enum {
      SUCCSSS,
-     INVALID_USAGE
-} context;
+     INVALID_USAGE,
+     MISSING_ARGS
+} CONTEXT;
 
 #endif // CONTEXT_H
 

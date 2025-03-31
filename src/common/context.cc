@@ -146,8 +146,24 @@ void Context::setStartContext(QPushButton *button, QMainWindow *windows,
       QMessageBox::information(windows, "Infomation", DEVICE_NOT_FOUND);
       return;
     }
-    if(!QFileInfo::exists(state->devicePath)) {
+
+    if (!QFileInfo::exists(state->devicePath)) {
       QMessageBox::information(windows, "Infomation", DEVICE_PATH_NOT_FOUND);
+      return;
+    }
+
+    if (!QFileInfo(state->devicePath).isReadable()) {
+      QMessageBox::information(windows, "Infomation", NO_ACCESS_PERMIT);
+      return;
+    }
+
+    if (!QFileInfo(state->devicePath).isWritable()) {
+      QMessageBox::information(windows, "infomation", NO_WRITE_PERMIT);
+      return;
+    }
+
+    if (state->devicePath.isEmpty() || !QFileInfo().exists(state->isoFilePath)) {
+      QMessageBox::information(windows, "Infomation", ISO_PATH_NOT_FOUND);
       return;
     }
   });

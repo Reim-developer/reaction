@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <string.h>
-#include "include/format.h"
+#include "include/cmd.h"
+#include "include/macro.h"
 #include "sys/include/status.h"
 #include <unistd.h>
 
 int main(int argc, char *argv[]) {
     if(argc == 1 || argv[1] == NULL) {
-        printf("Invalid usage\n");
+        printf(INVALID_USAGE_MSG);
         return INVALID_USAGE;
     } else if(strcmp(argv[1], "format") == 0) {
         format_cmd(argc, argv);
         return SUCCESS;
     }
-    printf("Bad usage. Usage helper --help for more infomation.\n");
-
+    printf( BAD_USAGE_MSG, argv[1]);
     
     return INVALID_USAGE;
 }

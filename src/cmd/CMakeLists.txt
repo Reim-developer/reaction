@@ -9,7 +9,7 @@ set(
     sys/core.c
     sys/fat32.c
 
-    format.c
+    cmd.c
     main.c 
 )
 

@@ -1,4 +1,5 @@
 #include "include/cmd.h"
+#include "include/macro.h"
 #include "sys/include/core.h"
 #include <stdio.h>
 

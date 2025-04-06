@@ -11,7 +11,10 @@ int main(int argc, char *argv[]) {
         return INVALID_USAGE;
     } else if(strcmp(argv[1], "format") == 0) {
         format_cmd(argc, argv);
-        return SUCCESS;
+        return VALID_USAGE;
+    } else if(strcmp(argv[1], "part") == 0) {
+        create_mbr_cmd(argc, argv);
+        return VALID_USAGE;
     }
     printf( BAD_USAGE_MSG, argv[1]);
     

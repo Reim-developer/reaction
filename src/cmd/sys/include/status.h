@@ -34,7 +34,8 @@ typedef enum {
     WRITE_SECTOR_FAILED, /* Write sector in device failed. Expands to 22 */
 
     MISSING_ARGS, /* Missing argument in CLI. Expands to 23 */
-    INVALID_USAGE /* Invalid usage in CLI. Expands to 24 */
+    INVALID_USAGE, /* Invalid usage in CLI. Expands to 24 */
+    VALID_USAGE /* Valid usage in CLI. Expands to 25 */
 } RESULT_STATUS;
 
 #endif // STATUS_H

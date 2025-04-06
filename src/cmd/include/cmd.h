@@ -2,7 +2,8 @@
 #define FORMAT_H
 #include "../sys/include/status.h"
 
-RESULT_STATUS format_cmd(int argv, char *args[]);
+RESULT_STATUS format_cmd(int argc, char *args[]);
+RESULT_STATUS create_mbr_cmd(int argc, char *args[]);
 
 #endif // FORMAT_H
 

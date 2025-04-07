@@ -10,7 +10,7 @@
 #include "QtWidgets/qmainwindow.h"
 #include "QtWidgets/qmessagebox.h"
 #include "QtWidgets/qpushbutton.h"
-#include "include/message.h"
+#include "include/message.hpp"
 #include "include/signal.hpp"
 #include "include/state.hpp"
 #include <QtWidgets/QFileDialog>
@@ -151,17 +151,7 @@ void Context::setStartContext(QPushButton *button, QMainWindow *windows,
       QMessageBox::information(windows, "Infomation", DEVICE_PATH_NOT_FOUND);
       return;
     }
-
-    if (!QFileInfo(state->devicePath).isReadable()) {
-      QMessageBox::information(windows, "Infomation", NO_ACCESS_PERMIT);
-      return;
-    }
-
-    if (!QFileInfo(state->devicePath).isWritable()) {
-      QMessageBox::information(windows, "infomation", NO_WRITE_PERMIT);
-      return;
-    }
-
+ 
     if (state->devicePath.isEmpty() || !QFileInfo().exists(state->isoFilePath)) {
       QMessageBox::information(windows, "Infomation", ISO_PATH_NOT_FOUND);
       return;

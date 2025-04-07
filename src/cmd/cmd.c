@@ -48,6 +48,12 @@ RESULT_STATUS create_mbr_cmd(int argc, char *args[]) {
     if(task_status == DEVICE_NOT_FOUND) {
         printf(DEVICE_NOT_FOUND_MSG);
         return DEVICE_NOT_FOUND;
+    } else if(task_status == ADD_PARTITION_FAILED) {
+        printf(ADD_PARTITION_FAILED_MSG);
+        return ADD_PARTITION_FAILED;
+    } else if(task_status == COMMIT_PARTITION_FAILED) {
+        printf(COMMIT_PARTITION_FAILED_MSG);
+        return COMMIT_PARTITION_FAILED;
     }
 
     return SUCCESS;

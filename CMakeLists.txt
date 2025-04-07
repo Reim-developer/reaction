@@ -32,7 +32,7 @@ set(
     src/common/context.cc
     src/common/include/context.hpp
 
-    src/common/include/message.h
+    src/common/include/message.hpp
 )
 
 find_package(Qt6 COMPONENTS Widgets REQUIRED)

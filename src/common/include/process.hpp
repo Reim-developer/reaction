@@ -2,11 +2,12 @@
 #define PROCESS_HPP
 #include <QtCore/QString>
 #include <QtCore/QStringList>
+#include <QtWidgets/QWidget>
 
 namespace Reaction::Common {
     class Process {
         public:
-            void setProcess(const QString &programPath, const QStringList &params);
+            int spawnProcess(QWidget *windows, const QString &programPath, const QStringList &params);
     };
 }
 

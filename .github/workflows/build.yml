@@ -42,10 +42,10 @@ jobs:
     - name: Package Release Binary
       run: |
         mkdir -p ${{github.workspace}}/release
-        cp ${{github.workspace}}/build/main ${{github.workspace}}/release/
+        cp ${{github.workspace}}/build/reaction-gui ${{github.workspace}}/release/
 
     - name: Upload Release Binary
       uses: actions/upload-artifact@v4
       with:
-        name: qt6-clang-release-binary
+        name: reaction-gui
         path: ${{github.workspace}}/release/

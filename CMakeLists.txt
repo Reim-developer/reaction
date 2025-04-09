@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(reaction LANGUAGES C CXX)
+project(reaction-gui LANGUAGES C CXX)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -45,9 +45,9 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(UDEV REQUIRED libudev)
 set(CMAKE_AUTOMOC ON)
 
-add_executable(main ${SOURCE_FILE})
+add_executable(${PROJECT_NAME} ${SOURCE_FILE})
 
-target_compile_options(main PRIVATE "$<$<CXX_COMPILER_ID:Clang>:-fno-direct-access-external-data>")
+target_compile_options(${PROJECT_NAME} PRIVATE "$<$<CXX_COMPILER_ID:Clang>:-fno-direct-access-external-data>")
 
-target_link_libraries(main Qt6::Widgets ${UDEV_LIBRARIES})
-target_include_directories(main PRIVATE ${UDEV_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} Qt6::Widgets ${UDEV_LIBRARIES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${UDEV_INCLUDE_DIR})

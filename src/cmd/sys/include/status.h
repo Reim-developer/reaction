@@ -1,6 +1,10 @@
 #ifndef STATUS_H
 #define STATUS_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum {
     SUCCESS, /* With no error. Expands to 0 */
     FAILED, /* With some error. Expands to 1 */
@@ -35,7 +39,12 @@ typedef enum {
 
     MISSING_ARGS, /* Missing argument in CLI. Expands to 23 */
     INVALID_USAGE, /* Invalid usage in CLI. Expands to 24 */
-    VALID_USAGE /* Valid usage in CLI. Expands to 25 */
+    VALID_USAGE, /* Valid usage in CLI. Expands to 25 */
+
+    CLI_PATH_NOT_FOUND /* CLI path directory not found. Expands to 26 */
 } RESULT_STATUS;
 
+#ifdef __cplusplus
+}
+#endif
 #endif // STATUS_H

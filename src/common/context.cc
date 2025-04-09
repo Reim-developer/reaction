@@ -15,6 +15,7 @@
 #include "include/state.hpp"
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
+#include "include/process.hpp"
 #include <iterator>
 
 using namespace std;
@@ -156,5 +157,8 @@ void Context::setStartContext(QPushButton *button, QMainWindow *windows,
       QMessageBox::information(windows, "Infomation", ISO_PATH_NOT_FOUND);
       return;
     }
+
+    Process process = Process();
+    process.spawnProcess(windows, "reaction-cli", {"./reaction-cli"});
   });
 }

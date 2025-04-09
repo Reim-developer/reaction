@@ -26,13 +26,18 @@ set(
     src/gui/include/dropbox.hpp
     src/gui/dropbox.cc
 
+    src/gui/include/progress.hpp
+    src/gui/progress.cc
+
     src/common/include/signal.hpp
     src/common/include/props.hpp
 
     src/common/context.cc
     src/common/include/context.hpp
+    src/common/process.cc
 
     src/common/include/message.hpp
+    src/common/include/process.hpp
 )
 
 find_package(Qt6 COMPONENTS Widgets REQUIRED)

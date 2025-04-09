@@ -1,10 +1,12 @@
 #include "init.hpp"
 #include "QtWidgets/qcombobox.h"
 #include "QtWidgets/qlabel.h"
+#include "QtWidgets/qprogressbar.h"
 #include "QtWidgets/qpushbutton.h"
 #include "include/buttons.hpp"
 #include "include/dropbox.hpp"
 #include "include/label.hpp"
+#include "include/progress.hpp"
 
 using namespace Reaction::Gui;
 
@@ -43,6 +45,9 @@ void InitUI::setup(MainWindow *window, Signal *signal, State *state, Context *co
     QPushButton *openDeviceButton = guiButtons->setButtons(window, "Choose device manually",600, 60, 200, 30);
     QPushButton *openBootFileButton  = guiButtons->setButtons(window, "Choose boot file", 360, 130, 200, 30);
     QPushButton *startButton = guiButtons->setButtons(window, "Start now", 10, 340, 280, 30);
+
+    GuiProgress *guiProgress = new GuiProgress();
+    QProgressBar *progressBar = guiProgress->setProgressBar(window, "Nothing to show..", 350, 340, 250, 30);
 
     context->getCurrentItemContext(deviceList, signal, state);
     context->setOpenFileContext(openBootFileButton, signal, window, bootSelctionList, state);

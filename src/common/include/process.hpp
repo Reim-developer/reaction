@@ -7,7 +7,7 @@
 namespace Reaction::Common {
     class Process {
         public:
-            int spawnProcess(QWidget *windows, const QString &programPath, const QStringList &params);
+            int spawnProcess(QWidget *windows, const QStringList &params);
     };
 }
 

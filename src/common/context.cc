@@ -159,6 +159,7 @@ void Context::setStartContext(QPushButton *button, QMainWindow *windows,
     }
 
     Process process = Process();
-    process.spawnProcess(windows, "reaction-cli", {"./reaction-cli"});
+    
+    process.spawnProcess(windows, {"./reaction-cli", "format", state->devicePath});
   });
 }

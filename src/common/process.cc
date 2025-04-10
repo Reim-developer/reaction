@@ -9,8 +9,8 @@
 
 using namespace Reaction::Common;
 
-int Process::spawnProcess(QWidget *windows, const QString &programPath, const QStringList &params) { 
-    QFile fileProgram = QFile(programPath);
+int Process::spawnProcess(QWidget *windows, const QStringList &params) { 
+    QFile fileProgram = QFile("reaction-cli");
 
     if(!fileProgram.exists()) {
         QMessageBox::information(windows, "Information", CLI_PROGRAM_PATH_NOT_FOUND);

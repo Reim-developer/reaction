@@ -159,7 +159,6 @@ void Context::setStartContext(QPushButton *button, QMainWindow *windows,
     }
 
     Process process = Process();
-    
-    process.spawnProcess(windows, {"./reaction-cli", "format", state->devicePath});
+    process.spawnProcess(windows, {"./reaction-cli", "gui-format-mbr-fat32", state->devicePath});
   });
 }

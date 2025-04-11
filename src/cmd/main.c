@@ -18,6 +18,11 @@ int main(int argc, char *argv[]) {
     } else if(strcmp(argv[1], "fat32") == 0) {
         create_fat32_sys_cmd(argc, argv);
         return VALID_USAGE;
+    } else if(strcmp(argv[1], "gui-format-mbr-fat32") == 0) {
+        format_cmd(argc, argv);
+        create_mbr_cmd(argc, argv);
+        create_fat32_sys_cmd(argc, argv);
+        return VALID_USAGE;
     }
     printf( BAD_USAGE_MSG, argv[1]);
     
